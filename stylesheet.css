@@ -1,0 +1,29 @@
+#main
+{
+	padding-top: 20px;
+	border-top: solid 3px rgb(215, 218, 224);
+}
+
+#name
+{
+	margin-left: -30px;
+}
+
+#submit
+{
+	color: black;
+}
+
+.form-control
+{
+	top : 1px;
+}
+
+h1
+{
+	color: white;
+	background-color: rgb(125, 128, 132);
+	padding: 10px;
+	margin-left: 430px;
+	margin-right: 430px;
+}

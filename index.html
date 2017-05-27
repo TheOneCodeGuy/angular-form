@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html ng-app = "form">
+	<head>
+		<title>Form</title>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link type="image/gif" rel="icon" href="logo.ico">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="stylesheet.css">
+		<script type = "text/javascript" src="app.js"></script></head>
+
+	<body ng-controller = "formControl as formCtrl">
+
+		<div class="fluid-container">
+
+		<h1 class="text-center">Registration Form</h1>
+
+			<div class="col-md-6 col-md-offset-4 col-xs-10 col-xs-offset-1 col-lg-4 col-md-offset-4" id="main">
+
+				<form name="form" novalidate>
+
+					<div class="row" id="name">
+						<div class="form-group col-md-6" ng-class = "{ 'has-error' : form.first.$invalid && !form.first.$pristine}">
+							<label for="first">First Name</label>
+							<div class="input-group">
+								<span class="glyphicon glyphicon-user input-group-addon"></span>
+								<input type="text"
+								name="first"
+								required
+								ng-minlegth = 2
+								pattern = "^[a-zA-Z]*$" 
+								placeholder="First Name"
+								ng-model = "formCtrl.user.fname"
+								class="form-control">
+							</div>
+							<p class="help-block" ng-show = "form.first.$error.required && !form.first.$pristine">
+								First Name can not be empty
+							</p>
+							<p class="help-block" ng-show = "form.first.$error.pattern && !form.first.$pristine">
+								First name should contain only letters
+							</p>
+							<p class="help-block" ng-show = "form.first.$error.minlength && !form.first.$pristine">
+								First Name should too short
+							</p>
+						</div>
+
+						<div class="form-group col-md-6" ng-class = "{ 'has-error' : form.last.$invalid && !form.last.$pristine}">
+							<label for="last">Last Name</label>
+							<input type="text"
+							name="last"
+							required
+							pattern = "^[a-zA-Z]*$" 
+							placeholder="Last Name"
+							ng-model = "formCtrl.user.lname"
+							class="form-control">
+							<p class="help-block" ng-show = "form.last.$error.required && !form.last.$pristine">
+								Last Name can not be empty
+							</p>
+							<p class="help-block" ng-show = "form.last.$error.pattern && !form.last.$pristine">
+								Last name should contain only letters
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group" ng-class = "{ 'has-error' : form.phno.$invalid && !form.phno.$pristine}">
+							<label for="phno">Phone Number</label>
+							<div class="input-group">
+								<span class="glyphicon glyphicon-earphone input-group-addon"></span>
+								<input
+									type="text"
+									name="phno"
+									required
+									ng-minlength = 10
+									ng-maxlength = 10
+									pattern="^[0-9]*$"  
+									placeholder="Phone Number"
+									ng-model = "formCtrl.user.phno"
+									class="form-control">
+							</div>
+							<p class="help-block" ng-show = "form.phno.$error.required && !form.phno.$pristine">
+								This field is required
+							</p>
+							<p class="help-block" ng-show = "form.phno.$error.pattern && !form.phno.$pristine">
+								Phone Number should contain only numbers
+							</p>
+							<p class="help-block" ng-show = "(form.phno.$error.minlength || form.phno.$error.maxlength) && !form.phno.$pristine">
+								Phone number should have 10 digits
+							</p>
+						</div>
+					</div>
+				
+					<div class="row">
+						<div class = "form-group" ng-class = "{ 'has-error' : form.email.$invalid && !form.email.$pristine}">
+							<label for = "email">Email</label>
+							<div class="input-group">
+								<span class="glyphicon glyphicon-envelope input-group-addon"></span>
+								<input
+									name = "email"
+									type = "text"
+									pattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,64}"
+									placeholder = "username@example.com"
+									ng-model = "formCtrl.user.email"
+									class = "form-control"
+									required>
+							</div>
+							<p ng-show = "form.email.$error.pattern && !form.email.$pristine" class="help-block">
+								Please Type a Valid Email
+							</p>
+							<p ng-show = "form.email.$error.required && !form.email.$pristine" class="help-block">
+								Email is required
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group" ng-class = "{ 'has-error' : form.state.$invalid && !form.state.$pristine}">
+						<label for = "state">State</label>
+						<div class="input-group">
+							<span class="glyphicon glyphicon-map-marker input-group-addon"></span>
+							<input type="text" name="statesearch" ng-model="formCtrl.user.state" class="form-control" 		placeholder="Enter Your State">
+						</div>
+							<select
+								class="form-control"
+								name = "state"
+								ng-model = "formCtrl.user.state"
+								required>
+									<option value = "">Select State</option>
+									<option value="{{state}}" ng-repeat = "state in formCtrl.states | filter : formCtrl.user.state">{{state}}</option>
+							</select>
+							<p ng-show = "form.state.$error.required && !form.state.$pristine" class="help-block">
+								State is required
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class = "form-group" ng-class = "{ 'has-error' : form.pass.$invalid && !form.pass.$pristine}">
+							<label for = "name">Password</label>
+							<div class="input-group">
+								<span class="glyphicon glyphicon-lock input-group-addon"></span>
+								<input 
+									name = "pass"
+									type = "password"
+									required
+									class = "form-control"
+									placeholder = "Atleast one Upper Case, Lower Case, Number, Special Character"
+									ng-maxlength = '15'
+									ng-minlength = '8'
+									pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$"
+									ng-model = "formCtrl.user.pass">
+							</div>
+							<p ng-show = "form.pass.$error.minlength" class = "help-block">
+								Password is too short
+							</p>
+							<p ng-show = "form.pass.$error.maxlength && !form.pass.$pristine" class = "help-block">
+								Password is too long
+							</p>
+							<p ng-show = "form.pass.$error.pattern && !form.pass.$pristine" class = "help-block">
+								Password does not match pattern
+							</p>
+							<p ng-show = "form.pass.$error.required && !form.pass.$pristine" class = "help-block">
+								Password is required
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class = "form-group" ng-class = "{ 'has-error' : !formCtrl.pass() && !form.cpass.$pristine}">
+							<label for = "cpass">Confirm Password</label>
+							<div class="input-group">
+								<span class="glyphicon glyphicon-repeat input-group-addon"></span>
+								<input 
+									type = "password"
+									name = "cpass"
+									class = "form-control"
+									ng-model = "formCtrl.user.cpass"
+									placeholder="Should match password">
+							</div>
+							<p class = "help-block" ng-show = "!form.cpass.$pristine && !formCtrl.pass()">
+								Passwords should match
+							</p>
+						</div>
+					</div>
+
+					<div class="row"> 
+						<div class = "form-group col-md-offset-4 col-md-4" >
+							<button class = "btn btn-success form-control" id="submit" ng-click = "formCtrl.submit()" ng-disabled = "form.$invalid || !formCtrl.validity">
+								Submit
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>		
